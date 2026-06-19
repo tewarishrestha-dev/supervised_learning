@@ -1,0 +1,60 @@
+import numpy as np
+import pandas as pd
+X = np.array([1,2,3,4,5,6,7,8,9,10])
+y = np.array([0,0,0,0,0,0,1,1,1,1])
+w = 0.0
+b = 0.0
+
+l_r= 0.1
+epochs = 1000
+
+n = len(X)
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+for epoch in range(epochs):
+
+    z = w * X.flatten() + b
+
+    y_pred = sigmoid(z)
+
+    dw = (1/n) * np.sum((y_pred - y) * X.flatten())
+    db = (1/n) * np.sum(y_pred - y)
+
+    w = w - l_r * dw
+    b = b - l_r * db
+
+    if epoch % 100 == 0:
+
+        loss = -(1/n) * np.sum(
+            y * np.log(y_pred + 1e-10)
+            + (1-y) * np.log(1-y_pred + 1e-10)
+        )
+
+        print(f"Epoch {epoch}")
+        print(f"Loss = {loss:.4f}")
+        print(f"w = {w:.4f}")
+        print(f"b = {b:.4f}")
+        print(f"z = {z}")
+        print(f"y_pred = {y_pred}")
+        print()
+
+def predict(x):
+
+    z = w * x + b
+
+    prob = sigmoid(z)
+
+    if prob >= 0.5:
+        return 1
+    else:
+        return 0
+    
+hours = 6.2466
+
+prob = sigmoid(w * hours + b)
+x=-b/w
+print(x)
+print("Probability of passing =", prob)
+print("Prediction =", predict(hours))
