@@ -14,11 +14,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-# ==================================================
-
 # Load Dataset
-
-# ==================================================
 
 housing = fetch_california_housing()
 
@@ -34,20 +30,12 @@ print(df.head())
 
 print("\nDataset Shape:", df.shape)
 
-# ==================================================
-
 # Features and Target
-
-# ==================================================
 
 X = housing.data
 y = housing.target
 
-# ==================================================
-
 # Train Test Split
-
-# ==================================================
 
 X_train, X_test, y_train, y_test = train_test_split(
 X,
@@ -56,11 +44,7 @@ test_size=0.3,
 random_state=7
 )
 
-# ==================================================
-
 # Random Forest Model
-
-# ==================================================
 
 rf = RandomForestRegressor(
 n_estimators=100,
@@ -73,11 +57,7 @@ rf.fit(X_train, y_train)
 
 y_pred = rf.predict(X_test)
 
-# ==================================================
-
 # Evaluation Metrics
-
-# ==================================================
 
 mse = mean_squared_error(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)
@@ -91,11 +71,7 @@ print(f"MAE  : {mae:.4f}")
 print(f"RMSE : {rmse:.4f}")
 print(f"R²   : {r2:.4f}")
 
-# ==================================================
-
 # Feature Importance
-
-# ==================================================
 
 importance = rf.feature_importances_
 
@@ -135,11 +111,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Actual vs Predicted
-
-# ==================================================
 
 plt.figure(figsize=(7,7))
 
@@ -173,11 +145,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Residual Plot
-
-# ==================================================
 
 residual = y_test - y_pred
 
@@ -209,11 +177,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Residual Histogram
-
-# ==================================================
 
 plt.figure(figsize=(8,5))
 
@@ -237,11 +201,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Decision Tree vs Random Forest
-
-# ==================================================
 
 tree = DecisionTreeRegressor(
 max_depth=10,
@@ -291,11 +251,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Number of Trees Analysis
-
-# ==================================================
 
 estimators = [1, 5, 10, 20, 50, 100, 200]
 
@@ -347,11 +303,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Overfitting Analysis
-
-# ==================================================
 
 depths = range(1, 21)
 
@@ -422,11 +374,7 @@ bbox_inches="tight"
 
 plt.close()
 
-# ==================================================
-
 # Depth-wise Scores
-
-# ==================================================
 
 print("\nDepth-wise R²")
 print("-" * 40)
