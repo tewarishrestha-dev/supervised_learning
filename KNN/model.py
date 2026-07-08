@@ -1,14 +1,16 @@
 import numpy as np
 class KNN:
     def __init__(
-        self,
-        k=5,
-        distance="euclidean",
-        p=2
-    ):
+    self,
+    k=5,
+    distance="euclidean",
+    weighted=False,
+    p=2
+):
 
         self.k = k
         self.distance = distance
+        self.weighted = weighted
         self.p = p
 
         self.X_train = None
@@ -88,21 +90,8 @@ class KNN:
             prediction = labels[np.argmax(counts)]  
         return prediction
     
-    
+
     def predict(self, X):
         predictions = [self._predict(x) for x in X]
         return np.array(predictions)     
     
-    def __init__(
-    self,
-    k=5,
-    distance="euclidean",
-    weighted=False
- ):
-
-       self.k = k
-       self.distance = distance
-       self.weighted = weighted
-
-       self.X_train = None
-       self.y_train = None
